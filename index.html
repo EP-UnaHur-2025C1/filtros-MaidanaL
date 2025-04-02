@@ -8,6 +8,9 @@
       async function  inicializar() {
         this.filtros = await new FiltroPaises();  
         this.filtros.addFiltro('Sudamerica', (e) => e.subregion ==='South America');
+        this.filtros.addFiltro('Población mayor a 100.000.000', (e) => e.population > 100000000);
+        this.filtros.addFiltro('Paises insulares', (e) => e.landlocked == false );
+        this.filtros.addFiltro('Paises de habla Guaraní', (e) => Object.values(e.languages || {}).includes("Guaraní"));
         const selectElement = document.getElementById('paises-select');
         const filtrosDisponibles = this.filtros.getFiltros()
         filtrosDisponibles.forEach( f => selectElement.add(new Option(f.name, f.name)));
